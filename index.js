@@ -1,20 +1,16 @@
 /**
  * insert URLs here
  */
-const urls = [
-  "https://naep-research.airprojects.org/",
-  "https://naep-research.airprojects.org/Opportunities",
-  "https://naep-research.airprojects.org/FeaturedWork/INRD",
-];
+const urls = ["https://www.amazon.com/", "https://www.google.com/"];
 
 // run the task
 const puppeteer = require("puppeteer");
 
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
-  const page = await browser.newPage();
 
   const collect = async (url) => {
+    const page = await browser.newPage();
     await page.goto(url);
     return await page.evaluate(() => {
       const list = [];
@@ -33,10 +29,10 @@ const puppeteer = require("puppeteer");
     });
   };
 
-  const allClasses = await Promise.all(urls.map(collect));
-  const uniqueClasses = new Set(...allClasses);
+  const allClasses = (await Promise.all(urls.map(collect))).flat();
+  const uniqueClasses = new Set(allClasses);
 
-  console.log(uniqueClasses, "\nDone! Press Control+C to terminate.");
+  console.log(allClasses, "\nDone! Press Control+C to terminate.");
 
   const fs = require("fs");
   const file = fs.createWriteStream("css_classes.txt");
