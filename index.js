@@ -36,10 +36,10 @@ const puppeteer = require("puppeteer");
 
   const fs = require("fs");
   const file = fs.createWriteStream("css_classes.txt");
-  file.on("error", function (err) {
+  file.on("error", (err) => {
     console.error(err);
   });
-  uniqueClasses.forEach(function (el) {
+  uniqueClasses.forEach((el) => {
     file.write(el + "\n");
   });
   file.end();
