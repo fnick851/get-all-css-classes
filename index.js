@@ -32,7 +32,7 @@ const puppeteer = require("puppeteer");
   const allClasses = (await Promise.all(urls.map(collect))).flat();
   const uniqueClasses = new Set(allClasses);
 
-  console.log(allClasses, "\nDone! Press Control+C to terminate.");
+  console.log(uniqueClasses, "\nDone! Press Control+C to terminate.");
 
   const fs = require("fs");
   const file = fs.createWriteStream("css_classes.txt");
